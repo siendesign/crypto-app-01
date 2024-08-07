@@ -4,9 +4,21 @@ import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+
+const tabs = [
+  { name: "Home", href: "/" },
+  { name: "Deals", href: "/deals" },
+  { name: "Trading Center", href: "/trading-center" },
+  { name: "About Us", href: "/about" },
+];
 
 const Navbar = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(pathname);
   return (
     <>
       <div className="flex justify-between items-center pt-10  p-5 max-w-7xl mx-auto sm:hidden">
@@ -29,14 +41,30 @@ const Navbar = () => {
       {isOpen && (
         <div className="p-5 sm:hidden">
           <ul className="flex flex-col gap-3 text-gray-300">
-            <Link href={"/"} className="w-full p-2 hover:bg-slate-500 rounded">
+            {tabs.map((tab, index) => (
+              <Link
+                href={tab.href}
+                className="w-full p-2 hover:bg-slate-500 rounded"
+              >
+                <li className={ pathname == tab.href ? "text-[#AEFFDE] w-full" : "text-gray-400 w-full" }>{tab.name}</li>
+              </Link>
+            ))}
+            {/* <Link href={"/"} className="w-full p-2 hover:bg-slate-500 rounded">
               <li className="text-[#AEFFDE] w-full">Home</li>
             </Link>
             <Link
               href={"/deals"}
-              className="w-full p-2 hover:bg-slate-500 rounded"
+              className={"w-full p-2 hover:bg-slate-500 rounded"}
             >
-              <li className="text-gray-400 w-full">Deals</li>
+              <li
+                className={
+                  pathname == "/deals"
+                    ? "text-[#AEFFDE] w-full"
+                    : "text-gray-400 w-full"
+                }
+              >
+                Deals
+              </li>
             </Link>
             <Link
               href={"/trading-center"}
@@ -49,7 +77,7 @@ const Navbar = () => {
               className="w-full p-2 hover:bg-slate-500 rounded"
             >
               <li className="text-gray-400  w-full">About Us</li>
-            </Link>
+            </Link> */}
           </ul>
           <div className="mt-3">
             <Button
@@ -77,10 +105,23 @@ const Navbar = () => {
 
         <div className="">
           <ul className="flex gap-3 text-gray-300">
-            <li className="text-[#AEFFDE]">
+            {tabs.map((tab, index) => (
+              <li
+                className={
+                  pathname == tab.href ? "text-[#AEFFDE]" : "text-gray-400"
+                }
+              >
+              <Link href={tab.href}>{tab.name}</Link>
+              </li>
+            ))}
+            {/* <li className="text-[#AEFFDE]">
               <Link href={"/"}>Home</Link>
             </li>
-            <li className="">
+            <li
+              className={
+                pathname == "/deals" ? "text-[#AEFFDE]" : "text-gray-400"
+              }
+            >
               <Link href={"/deals"}>Deals</Link>
             </li>
             <li className="">
@@ -88,7 +129,7 @@ const Navbar = () => {
             </li>
             <li className="">
               <Link href={"/about"}>About Us</Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 

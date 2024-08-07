@@ -14,10 +14,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import { TiTick } from "react-icons/ti";
 
 const SearchandFilter = () => {
   const [position, setPosition] = useState("bottom");
   const [isOpen, setIsOpen] = useState(false);
+   const [isOpen2, setIsOpen2] = useState(false);
+  const [type, setType] = useState("all");
   return (
     <div className="max-w-7xl  mx-auto mt-5 space-y-3">
       <div className="flex gap-1 md:hidden">
@@ -30,7 +33,11 @@ const SearchandFilter = () => {
         </Button>
       </div>
       <div className="flex items-center ">
-        <Button variant={"ghost"} className="text-[#AEFFDE] text-xl md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <Button
+          variant={"ghost"}
+          className="text-[#AEFFDE] text-xl md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <LuSettings2 />
         </Button>
 
@@ -61,7 +68,48 @@ const SearchandFilter = () => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {isOpen && <div className="">lknlknldknpkn</div>}
+      {isOpen && (
+        <div className="">
+          {" "}
+          <Button
+            variant={"ghost"}
+            className="w-full flex justify-between text-[#AEFFDE] hover:bg-transparent hover:text-[#AEFFDE]"
+            onClick={() => setIsOpen2(!isOpen2)}
+          >
+            <p className="font-black">Type</p>{" "}
+            <MdOutlineKeyboardArrowDown
+              className={
+                "text-lg " +
+                (!isOpen && "transition ease-in-out rotate-180 duration-300")
+              }
+            />
+          </Button>
+          <div
+            className={
+              "w-full overflow-hidden h-auto" +
+              (!isOpen2 && "transition ease-in-out h-0 duration-300")
+            }
+          >
+            <div className="space-y-3">
+              {["all", "ongoing", "confirmed", "cancelled"].map(
+                (item, index) => (
+                  <Button
+                    key={index}
+                    className="w-full flex justify-between items-center capitalize text-[#AEFFDE]"
+                    variant={"ghost"}
+                    onClick={() => setType(item)}
+                  >
+                    <p className="">{item}</p>{" "}
+                    <div className="">
+                      <TiTick className={type == item ? "block" : "hidden"} />
+                    </div>
+                  </Button>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

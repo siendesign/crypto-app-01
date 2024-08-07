@@ -7,9 +7,7 @@ import Partners from "./components/Partners";
 import WhoWeAre from "./components/WhoWeAre";
 
 const page = () => {
-  return <div>
-    <Navbar/>
-    <Header/>
+  return <div>    <Header/>
     <AboutUsContent/>
     <WhoWeAre/>
     <Partners/>

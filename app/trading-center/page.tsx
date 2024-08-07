@@ -8,7 +8,6 @@ import DealCards from "./components/DealCards";
 const page = () => {
   return (
     <div>
-      <Navbar />
       <Header/>
       <div className="grid grid-cols-12 p-5 max-w-7xl mx-auto">
         <div className="col-span-3 hidden md:block">
